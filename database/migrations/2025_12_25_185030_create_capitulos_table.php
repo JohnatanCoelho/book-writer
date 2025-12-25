@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('capitulos', function (Blueprint $table) {
             $table->id();
-            $table->titulo();
-            $table->personagens();
-            $table->ideia();
-            $table->numero_paragrafo(); 
+            $table->string('titulo', 100) -> index -> unique;
+            $table->string('personagens', 250);
+            $table->text("ideia_principal");
+            $table->integer('numero_paragrafos'); 
             $table->timestamps();
         });
     }

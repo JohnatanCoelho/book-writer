@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('livros', function (Blueprint $table) {
             $table->id();
-            $table->nome();
-            $table->tipo();
+            $table->string('nome', 100)->index->unique();
+            $table->string('tipo', 50);
             $table->timestamps();
         });
     }
