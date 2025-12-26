@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\LivroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/livros', [LivroController::class, 'index'])->name('livros');
 
 Route::get('/', function () {
     return view('welcome');
