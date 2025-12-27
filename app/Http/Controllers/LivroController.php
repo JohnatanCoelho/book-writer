@@ -14,4 +14,5 @@ class LivroController extends Controller
         return view('livros.index', compact('livros'));
     }
 
+
 }

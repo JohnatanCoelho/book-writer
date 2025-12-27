@@ -6,6 +6,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/livros', [LivroController::class, 'index'])->name('livros');
 
+Route::get('/cd_livro', function(){
+    return view('livros.cadastro');
+})->name('cd_livro');
+
 Route::get('/', function () {
     return view('welcome');
 });
