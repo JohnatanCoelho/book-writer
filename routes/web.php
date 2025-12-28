@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/livros', [LivroController::class, 'index'])->name('livros');
 
-Route::get('/cd_livro', function(){
-    return view('livros.cadastro');
-})->name('cd_livro');
+// Rota de cadastro de livro
+Route::get('/cd_livro', [LivroController::class, 'create'])->name('cd_livro');
+Route::post("/livros", [LivroController::class, 'cadastrarLivro'])->name('cadastrar.livro');
 
 Route::get('/', function () {
     return view('welcome');

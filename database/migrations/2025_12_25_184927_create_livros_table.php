@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('nome', 100)->unique;
             $table->string('tipo', 50);
-            $table->timestamps();
         });
     }
 

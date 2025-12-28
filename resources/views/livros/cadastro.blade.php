@@ -18,7 +18,7 @@
             margin-top: 2%;
        }
 
-       form input[type='button']{
+       form input[type='submit']{
             background-color: #fff;
             width: 25%;
             display: block;
@@ -39,11 +39,13 @@
         </h2>
     </x-slot>
 
+    <!-- Formulário do Livro-->
     <div class="form-cad">
-    <form action="" method="post">
-        <input type="text" placeholder="Título do Livro">
-        
-        <input type="button" value="Enviar">
+    <form action="{{route('cadastrar.livro')}}" method="post">
+        @csrf
+       <input type="text" name="titulo" placeholder="Título do Livro">
+        <input type="text" name="tipo" placeholder="Tipo do Livro">
+        <input type="submit" value="Enviar">
     </form>
     </div>
 </x-app-layout>
