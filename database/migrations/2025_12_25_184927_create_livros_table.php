@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('livros', function (Blueprint $table) {
             $table->id();
-            $table->string('nome', 100)->unique;
+            $table->string('titulo', 100)->unique;
             $table->string('tipo', 50);
         });
     }

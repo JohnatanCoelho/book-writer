@@ -43,6 +43,7 @@
     <div class="form-cad">
     <form action="{{route('cadastrar.livro')}}" method="post">
         @csrf
+        <input type="text" name="_token" value="{{ csrf_token() }}">
        <input type="text" name="titulo" placeholder="Título do Livro">
         <input type="text" name="tipo" placeholder="Tipo do Livro">
         <input type="submit" value="Enviar">

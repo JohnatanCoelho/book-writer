@@ -49,7 +49,7 @@
     <tbody>
         @foreach($livros as $livro)
         <tr>
-            <td>{{$livro -> nome}}</td>
+            <td>{{$livro -> titulo}}</td>
             <td>{{$livro -> tipo}}</td>
         </tr>
         @endforeach

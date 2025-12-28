@@ -21,7 +21,7 @@ class LivroController extends Controller
 
     public function cadastrarLivro(Request $request){
         
-        Livro::created($request->except('_token')); 
+        Livro::create($request->all()); 
 
         return redirect()->route('livros');
     }

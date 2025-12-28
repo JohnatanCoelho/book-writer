@@ -13,4 +13,6 @@ class Livro extends Model{
         'titulo',
         'tipo'
     ];
+
+    public $timestamps = false;
 }
