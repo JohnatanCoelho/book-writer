@@ -34,7 +34,7 @@
         }
 
         .select2-container--default .select2-selection--single {
-            height: 50px;
+            height: 55px;
             padding: 15px;
             width: 100%;
         }
