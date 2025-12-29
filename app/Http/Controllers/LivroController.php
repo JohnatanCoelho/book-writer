@@ -10,7 +10,7 @@ class LivroController extends Controller
     
     public function index(){
 
-        $livros = Livro::paginate(10); // paginate() -> pode páginar registros muito bom por sinal
+        $livros = Livro::all(); // paginate() -> pode páginar registros muito bom por sinal
 
         return view('livros.index', compact('livros'));
     }
