@@ -10,6 +10,8 @@ Route::get('/livros', [LivroController::class, 'index'])->name('livros');
 Route::get('/cd_livro', [LivroController::class, 'create'])->name('cd_livro');
 Route::post("/livros", [LivroController::class, 'cadastrarLivro'])->name('cadastrar.livro');
 
+Route::delete("/deletar-livro/{livro}", [LivroController::class, 'deletarLivro'])->name('deletar.livro');
+
 Route::get('/', function () {
     return view('welcome');
 });

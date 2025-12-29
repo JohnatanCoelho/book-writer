@@ -26,4 +26,10 @@ class LivroController extends Controller
         return redirect()->route('livros');
     }
 
+    public function deletarLivro(Livro $livro){
+        $livro -> delete();
+
+        return redirect()->view('livro.index');
+    }
+
 }
