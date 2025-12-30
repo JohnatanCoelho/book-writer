@@ -13,7 +13,7 @@
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('livros')" :active="request()->routeIs('livros')">
-                        {{ __('Livros') }}
+                        {{ __('Listar Livros') }}
                     </x-nav-link>
                     <x-nav-link :href="route('cd_livro')" :active="request()->routeIs('cd_livro')">
                         {{ __('Cadastrar Livros') }}

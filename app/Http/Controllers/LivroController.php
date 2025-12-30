@@ -10,7 +10,7 @@ class LivroController extends Controller
     
     public function index(){
 
-        $livros = Livro::all(); // paginate() -> pode páginar registros muito bom por sinal
+        $livros = Livro::all(); 
 
         return view('livros.index', compact('livros'));
     }
@@ -29,7 +29,18 @@ class LivroController extends Controller
     public function deletarLivro(Livro $livro){
         $livro -> delete();
 
-        return redirect()->view('livro.index');
+        return redirect()->route('livros');
+    }
+
+    public function update(Request $request){
+
+        $request->validate();
+        
+    }
+
+    public function pgatualizacao(Livro $livro){
+        
+            return view('livros.atualizarLivro', compact('livro'));
     }
 
 }

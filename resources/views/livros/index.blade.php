@@ -73,13 +73,16 @@
                     <tr>
                         <td>{{$livro -> titulo}}</td>
                         <td>{{$livro -> tipo}}</td>
-                        <form method="POST" action="{{ route('deletar.livro', ['livro' => $livro -> id]) }}">
-                            @csrf
-                            @method('delete')
-                            <td><button class="btn btn-deletar">Deletar</button></td>
-                        </form>
-                        <td><button class="btn btn-editar">Editar</button></td>
-
+                        <td>
+                            <form method="POST" action="{{ route('deletar.livro', ['livro' => $livro -> id]) }}">
+                                @csrf
+                                @method('delete')
+                                <button class="btn btn-deletar">Deletar</button>
+                            </form>
+                        </td>
+                        <td>
+                            <button class="btn btn-editar"><a href="{{ route('update', ['livro' => $livro -> id]) }}">Editar</button>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>
