@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('personagens', 250);
             $table->text("ideia_principal");
             $table->integer('numero_paragrafos'); 
-
+            $table->foreignId('livro_id')->constrained('livros')->onDelete('cascade');
+             $table->text('resumo_gerado')->nullable();
         });
     }
 

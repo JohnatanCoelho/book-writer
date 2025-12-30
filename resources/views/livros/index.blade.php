@@ -36,6 +36,10 @@
             margin: auto;
             font-weight: bold;
         }
+        .btn-cap{
+            background-color: #5cc237ff;
+            padding: 10px;
+        }
 
         .btn-deletar {
             background-color: #f44e4eff;
@@ -46,6 +50,7 @@
             background-color: #ddbf3eff;
             padding: 10px;
         }
+
     </style>
 </head>
 
@@ -64,6 +69,7 @@
                     <tr>
                         <td>Nome</td>
                         <td>Tipo</td>
+                        <td>Capítulos</td>
                         <td>Deletar</td>
                         <td>Editar</td>
                     </tr>
@@ -73,6 +79,7 @@
                     <tr>
                         <td>{{$livro -> titulo}}</td>
                         <td>{{$livro -> tipo}}</td>
+                        <td><button class="btn btn-cap"><a href="{{ route('capitulos', ['livro' => $livro -> id]) }}">Visualizar</button></td>
                         <td>
                             <form method="POST" action="{{ route('deletar.livro', ['livro' => $livro -> id]) }}">
                                 @csrf

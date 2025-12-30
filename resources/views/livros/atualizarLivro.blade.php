@@ -20,12 +20,13 @@
         form input {
             width: 100%;
             padding: 15px;
-            margin-top: 2%;
-            margin-bottom: 3%;
+            margin-top: 3%;
+            margin-bottom: 4%;
         }
 
         form input[type='submit'] {
             background-color: #fff;
+            margin-top: 4%;
             width: 25%;
             display: block;
             margin-left: auto;

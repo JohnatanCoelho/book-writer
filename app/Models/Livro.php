@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Capitulo;
 
 class Livro extends Model{
     
@@ -15,4 +15,8 @@ class Livro extends Model{
     ];
 
     public $timestamps = false;
+
+    public function capitulos(){
+       return $this -> hasMany(Capitulo::class);
+    }
 }

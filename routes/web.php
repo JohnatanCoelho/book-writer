@@ -1,12 +1,17 @@
 <?php
 
+use App\Http\Controllers\CapituloController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/livros', [LivroController::class, 'index'])->name('livros');
+//Rota de capitulos
+Route::get('/cd_cap', [CapituloController::class, 'create'])->name('cd_cap');
+Route::post('/cd_cap', [CapituloController::class, 'cadastrar'])->name('cadastrar.capitulo');
+Route::get('/capitulos/{livro}', [CapituloController::class, 'index'])->name('capitulos');
 
-// Rota de cadastro de livro
+// Rota livro
+Route::get('/livros', [LivroController::class, 'index'])->name('livros');
 Route::get('/cd_livro', [LivroController::class, 'create'])->name('cd_livro');
 Route::post("/livros", [LivroController::class, 'cadastrarLivro'])->name('cadastrar.livro');
 
@@ -15,13 +20,10 @@ Route::put("/update/{livro}", [LivroController::class, 'update'])->name("atualiz
 
 Route::delete("/deletar-livro/{livro}", [LivroController::class, 'deletarLivro'])->name('deletar.livro');
 
+//Welcome
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

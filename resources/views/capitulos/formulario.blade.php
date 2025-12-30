@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Livros</title>
+    <title>Cadastro de Capitulos</title>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -20,8 +20,7 @@
         form input {
             width: 100%;
             padding: 15px;
-            margin-top: 3%;
-            margin-bottom: 4%;
+            margin-bottom: 5%;
         }
 
         form input[type='submit'] {
@@ -47,30 +46,24 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Cadastro Livros') }}
+                {{ __('Formulário de capitulos') }}
             </h2>
         </x-slot>
 
         <!-- Formulário do Livro-->
         <div class="form-cad">
-            <form action="{{route('cadastrar.livro')}}" method="post">
+            <form action="{{route('cadastrar.capitulo')}}" method="post">
                 @csrf
                 <input type="hidden" name="_token" value="{{ csrf_token()}}">
-                <input type="text" name="titulo" placeholder="Título do Livro">
-                <select class="select2" name="tipo" style="width: 100%">
-                    <option></option>
-                    <option value="Ação">Ação</option>
-                    <option value="Aventura">Aventura</option>
-                    <option value="Comédia">Comédia</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Romance">Romance</option>
-                    <option value="Fantasia">Fantasia</option>
-                    <option value="Ficção">Ficção</option>
-                    <option value="Terror">Terror</option>
-                    <option value="Infantil">Infantil</option>
-                    <option value="Poesia">Poesia</option>
-                    <option value="Conto de Fadas">Conto de Fadas</option>
-                    <option value="Mistério">Mistério</option>
+                <input type="text" name="titulo" placeholder="Título do Capítulo">
+                <input type="text" name="personagens" placeholder="Personagens">
+                <input type="text" name="ideia_principal" placeholder="Ideia Principal">
+                <input type="text" name="numero_paragrafos" placeholder="Numero de Paragráfos">
+                <select  name="livro_id" class="select2" style="width: 100%">
+                    <option>Selecione o Livro</option>
+                   @foreach($livros as $livro)
+                   <option value="{{ $livro->id }}">{{$livro -> titulo}}</option>
+                   @endforeach
                 </select>
                 <input type="submit" value="Enviar">
             </form>

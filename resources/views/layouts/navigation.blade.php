@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('cd_livro')" :active="request()->routeIs('cd_livro')">
                         {{ __('Cadastrar Livros') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('cd_cap')" :active="request()->routeIs('cd_cap')">
+                        {{ __('Cadastrar Capitulos') }}
+                    </x-nav-link>
                 </div>
             </div>
 
