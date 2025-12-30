@@ -81,7 +81,7 @@
                             </form>
                         </td>
                         <td>
-                            <button class="btn btn-editar"><a href="{{ route('update', ['livro' => $livro -> id]) }}">Editar</button>
+                            <button class="btn btn-editar"><a href="{{ route('edit', ['livro' => $livro -> id]) }}">Editar</button>
                         </td>
                     </tr>
                     @endforeach

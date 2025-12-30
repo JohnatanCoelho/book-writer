@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Livro;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class LivroController extends Controller
 {
@@ -32,15 +33,28 @@ class LivroController extends Controller
         return redirect()->route('livros');
     }
 
-    public function update(Request $request){
+    public function edit(Livro $livro){
 
-        $request->validate();
-        
+            return view('livros.atualizarLivro', compact('livro'));
     }
 
-    public function pgatualizacao(Livro $livro){
-        
-            return view('livros.atualizarLivro', compact('livro'));
+    public function update(Request $request, Livro $livro){
+
+        $request -> validate([
+            'titulo' => [
+                'required',
+                'string',
+                Rule::unique('livros', 'titulo' )->ignore($livro->id),
+            ],
+            'tipo' => 'required|string'
+        ]);
+
+        $livro -> update([
+            'titulo' => $request -> titulo,
+            'tipo' => $request -> tipo
+        ]);
+
+        return redirect()->route('livros')->with('Atualizado com sucesso!');
     }
 
 }

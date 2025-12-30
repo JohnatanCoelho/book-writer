@@ -60,18 +60,16 @@
                     <option></option>
                     <option value="Ação">Ação</option>
                     <option value="Aventura">Aventura</option>
-                    <option value="Conto">Conto</option>
-                    <option value="Crônica">Crônica</option>
+                    <option value="Comédia">Comédia</option>
                     <option value="Drama">Drama</option>
-                    <option value="Distopia">Distopia</option>
+                    <option value="Romance">Romance</option>
                     <option value="Fantasia">Fantasia</option>
-                    <option value="Ficção Científica">Ficção Científica</option>
                     <option value="Ficção">Ficção</option>
                     <option value="Terror">Terror</option>
                     <option value="Infantil">Infantil</option>
-                    <option value="Juvenil">Juvenil</option>
+                    <option value="Poesia">Poesia</option>
                     <option value="Conto de Fadas">Conto de Fadas</option>
-                    <option value="Educativo">Educativo</option>
+                    <option value="Mistério">Mistério</option>
                 </select>
                 <input type="submit" value="Enviar">
             </form>

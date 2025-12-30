@@ -10,8 +10,8 @@ Route::get('/livros', [LivroController::class, 'index'])->name('livros');
 Route::get('/cd_livro', [LivroController::class, 'create'])->name('cd_livro');
 Route::post("/livros", [LivroController::class, 'cadastrarLivro'])->name('cadastrar.livro');
 
-Route::get("/upd_livros/{livro}", [LivroController::class, 'pgatualizacao'])->name('update'); // Apresenta a página de atualizar o livro
-Route::post("/update/{livro}", [LivroController::class, 'update'])->name("atualizar.livro"); // Atualizar o livro
+Route::get("/edit/{livro}", [LivroController::class, 'edit'])->name('edit'); // Apresenta a página de atualizar o livro
+Route::put("/update/{livro}", [LivroController::class, 'update'])->name("atualizar.livro"); // Atualizar o livro
 
 Route::delete("/deletar-livro/{livro}", [LivroController::class, 'deletarLivro'])->name('deletar.livro');
 

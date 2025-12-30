@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Livros</title>
+    <title>Atualização de livros</title>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -50,28 +50,25 @@
             </h2>
         </x-slot>
 
-        <!-- Formulário do Livro-->
         <div class="form-cad">
-            <form action="{{route('cadastrar.livro')}}" method="post">
+            <form action="{{route('atualizar.livro', ['livro' => $livro -> id])}}" method="post">
                 @csrf
-                <input type="hidden" name="_token" value="{{ csrf_token()}}">
-                <input type="text" name="titulo" placeholder="Título do Livro">
-                <select class="select2" name="tipo" style="width: 100%">
+                 @method('PUT')
+                <input type="text" name="titulo" placeholder="Título do Livro" value="{{ old('titulo', $livro -> titulo)}}">
+                <select class="select2" name="tipo" style="width: 100%" >
                     <option></option>
-                    <option value="Ação">Ação</option>
-                    <option value="Aventura">Aventura</option>
-                    <option value="Conto">Conto</option>
-                    <option value="Crônica">Crônica</option>
-                    <option value="Drama">Drama</option>
-                    <option value="Distopia">Distopia</option>
-                    <option value="Fantasia">Fantasia</option>
-                    <option value="Ficção Científica">Ficção Científica</option>
-                    <option value="Ficção">Ficção</option>
-                    <option value="Terror">Terror</option>
-                    <option value="Infantil">Infantil</option>
-                    <option value="Juvenil">Juvenil</option>
-                    <option value="Conto de Fadas">Conto de Fadas</option>
-                    <option value="Educativo">Educativo</option>
+                    <option value="Ação" @selected(old('tipo', $livro->tipo) == 'Ação')>Ação</option>
+                    <option value="Aventura" @selected(old('tipo', $livro->tipo) == 'Aventura')>Aventura</option>
+                    <option value="Comédia" @selected(old('tipo', $livro->tipo) == 'Comédia')>Comédia</option>
+                    <option value="Drama" @selected(old('tipo', $livro->tipo) == 'Drama')>Drama</option>
+                    <option value="Romance" @selected(old('tipo', $livro->tipo) == 'Romance')>Romance</option>
+                    <option value="Fantasia" @selected(old('tipo', $livro->tipo) == 'Fantasia')>Fantasia</option>
+                    <option value="Ficção" @selected(old('tipo', $livro->tipo) == 'Ficção')>Ficção</option>
+                    <option value="Terror" @selected(old('tipo', $livro->tipo) == 'Terror')>Terror</option>
+                    <option value="Infantil" @selected(old('tipo', $livro->tipo) == 'Infantil')>Infantil</option>
+                    <option value="Poesia" @selected(old('tipo', $livro->tipo) == 'Poesia')>Poesia</option>
+                    <option value="Conto de Fadas" @selected(old('tipo', $livro->tipo) == 'Conto de Fadas')>Conto de Fadas</option>
+                    <option value="Mistério" @selected(old('tipo', $livro->tipo) == 'Mistério')>Mistério</option>
                 </select>
                 <input type="submit" value="Atualizar">
             </form>
