@@ -11,16 +11,61 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
     <style>
-        .cap{
-            background-color: white;
-            color: #000000ff;
-            width: 30%;
+        .cap-alinhado {
             margin: auto;
-            border-radius: 15px;
+            display: flex;
+            width: 90%;
+            flex-direction: row;
+            flex-wrap: wrap;
+            align-items: stretch;
             margin-top: 5%;
+            gap: 20px;
         }
-        .cap p{
+
+        .cap {
+            background-color: #1F2937;
+            color: #fff;
+            width: calc(33.333% - 20px);
+            border-radius: 15px;
+            padding-bottom: 15px;
+        }
+
+        .cap p {
+            margin-left: 3.5%;
             padding: 2%;
+        }
+
+        .cap h1 {
+            margin-left: 3.5%;
+            padding: 2%;
+            font-size: 25px;
+        }
+
+        .btn-alinhado {
+            display: flex;
+            margin-top: 2%;
+            margin-left: 3.5%;
+
+        }
+
+        .btn {
+            text-align: center;
+            display: block;
+            font-weight: bold;
+            margin-left: 1.5%;
+            color: white;
+            border-radius: 15px;
+            margin-left: 1%;
+        }
+
+        .btn-escrever {
+            background-color: #5cc237ff;
+            padding: 10px;
+        }
+
+        .btn-Vis {
+            background-color: #3e37c2ff;
+            padding: 10px;
         }
     </style>
 </head>
@@ -33,15 +78,21 @@
                 {{ __('Lista de Capitulos') }}
             </h2>
         </x-slot>
-        @foreach($capitulos as $capitulo)
-        <div class="cap">
-            <p><b>Capitulo:</b> {{$loop-> index + 1}}</p>
-            <p><b>Título:</b> {{$capitulo -> titulo}}</p>
-            <p><b>Personagens:</b> {{$capitulo -> personagens}}</p>
-            <p><b>Ideia Principal:</b> {{$capitulo -> ideia_principal}}</p>
-            <p><b>Número de parágrafos:</b> {{$capitulo -> numero_paragrafos}}</p>
+        <div class="cap-alinhado">
+            @foreach($capitulos as $capitulo)
+            <div class="cap">
+                <h1><b>Capitulo:</b> {{$loop->index + 1}}</h1>
+                <p><b>Título:</b> {{$capitulo->titulo}}</p>
+                <p><b>Personagens:</b> {{$capitulo->personagens}}</p>
+                <p><b>Ideia Principal:</b> {{$capitulo->ideia_principal}}</p>
+                <p><b>Número de parágrafos:</b> {{$capitulo->numero_paragrafos}}</p>
+                <div class="btn-alinhado">
+                    <a href="{{ route('buscar.capitulo', ['capitulo' => $capitulo->id]) }}"><button type="submit" class="btn btn-Vis">Visualizar</button></a>
+                </div>
+                <br>
+            </div>
+            @endforeach
         </div>
-        @endforeach
     </x-app-layout>
 </body>
 

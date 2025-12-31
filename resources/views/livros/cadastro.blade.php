@@ -71,6 +71,7 @@
                     <option value="Poesia">Poesia</option>
                     <option value="Conto de Fadas">Conto de Fadas</option>
                     <option value="Mistério">Mistério</option>
+                    <option value="Reflexão">Reflexão</option>
                 </select>
                 <input type="submit" value="Enviar">
             </form>
