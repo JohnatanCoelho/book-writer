@@ -10,7 +10,9 @@ Route::get('/cd_cap', [CapituloController::class, 'create'])->name('cd_cap');
 Route::post('/cd_cap', [CapituloController::class, 'cadastrar'])->name('cadastrar.capitulo');
 Route::get('/capitulos/{livro}', [CapituloController::class, 'index'])->name('capitulos');
 Route::get('/cap/{capitulo}', [CapituloController::class, 'buscar'])->name('buscar.capitulo');
-
+Route::delete('/deletar-cap/{capitulo}', [CapituloController::class, 'deletar'])->name('deletar.capitulo');
+Route::get('/editar-cap/{capitulo}', [CapituloController::class, 'editarpg'])->name('editarpg.capitulo');
+Route::put('/editar-cap/{capitulo}', [CapituloController::class, 'editar'])->name('editar.capitulo');
 
 // Rota livro
 Route::get('/livros', [LivroController::class, 'index'])->name('livros');

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro de Capitulos</title>
+    <title>Editar Capítulos</title>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -46,22 +46,23 @@
     <x-app-layout>
         <x-slot name="header">
             <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-                {{ __('Formulário de capitulos') }}
+                {{ __('Editar capitulo') }}
             </h2>
         </x-slot>
 
         <div class="form-cad">
-            <form action="{{route('cadastrar.capitulo')}}" method="post">
+            <form action="{{route('editar.capitulo', ['capitulo' => $capitulo->id])}}" method="POST">
                 @csrf
-                <input type="hidden" name="_token" value="{{ csrf_token()}}">
-                <input type="text" name="titulo" placeholder="Título do Capítulo">
-                <input type="text" name="personagens" placeholder="Personagens">
-                <input type="text" name="ideia_principal" placeholder="Ideia Principal">
-                <input type="text" name="numero_paragrafos" placeholder="Numero de Paragráfos">
+                @method('PUT')
+                <input type="text" name="titulo" placeholder="Título do Capítulo" value="{{ old('titulo', $capitulo-> titulo)}}">
+                <input type="text" name="personagens" placeholder="Personagens" value="{{ old('personagens', $capitulo-> personagens)}}">
+                <input type="text" name="ideia_principal" placeholder="Ideia Principal" value="{{ old('ideia_principal', $capitulo-> ideia_principal)}}">
+                <input type="text" name="numero_paragrafos" placeholder="Numero de Paragráfos" value="{{ old('numero_paragrafos', $capitulo-> numero_paragrafos)}}">
                 <select  name="livro_id" class="select2" style="width: 100%">
                     <option>Selecione o Livro</option>
                    @foreach($livros as $livro)
-                   <option value="{{ $livro->id }}">{{$livro -> titulo}}</option>
+                   <option value="{{ $livro->id }}" {{ old('livro_id', $capitulo->livro_id) == $livro->id ? 'selected' : '' }}>
+                    {{ $livro->titulo }}</option>
                    @endforeach
                 </select>
                 <input type="submit" value="Enviar">

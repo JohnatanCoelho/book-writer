@@ -4,10 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Capitulo;
 use App\Models\Livro;
-use Hamcrest\Arrays\IsArray;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Validation\Rule;
 
 
 class CapituloController extends Controller
@@ -57,9 +56,76 @@ class CapituloController extends Controller
         return redirect()->route('livros');
     }
 
-    public function buscar(Capitulo $capitulo){
+    public function buscar(Capitulo $capitulo)
+    {
         $cap = Capitulo::find($capitulo->id);
 
        return view('capitulos.visualizar', compact('cap'));
+    }
+
+    public function deletar(Capitulo $capitulo)
+    {
+        //Buscando o id do livro
+        $livro = $capitulo->livro_id;
+        $livroFind =Livro::find($livro);
+
+        $capitulo->delete();
+
+        return redirect()->route('capitulos', ['livro' => $livroFind->id]);
+    }
+
+
+    public function editarpg(Capitulo $capitulo){
+        $livros = Livro::all();
+
+        return view('capitulos.editar', compact(['livros', 'capitulo']));
+
+    }
+
+    public function editar(Request $request, Capitulo $capitulo){
+
+        $request -> validate([
+            'titulo' =>[
+                'required',
+                'string',
+                Rule::unique('capitulos', 'titulo')->ignore($capitulo->id),
+            ],
+            'personagens' => 'required|string',
+            'ideia_principal' => 'required|string',
+            'numero_paragrafos' => 'required|integer|min:1',
+            'livro_id' => 'required|exists:livros,id',
+        ]);
+
+        $endpoint = 'https://n8n.pandoapps.com.br/webhook/escritoraDeLivros';
+
+        $payload = [
+            'Título' => $request->titulo,
+            'Personagens' => $request->personagens,
+            'Ideia' => $request->ideia_principal,
+            'Número de Parágrafos' => (int) $request->numero_paragrafos
+        ];
+
+        $response = Http::post($endpoint, $payload);
+        
+        $data = $response->json();
+        $body = $data['output'];
+
+        // tranforma o array em string
+        if(is_Array($body)){
+            $body = implode('\n\n', $body);
+        }
+
+       $capitulo->update([
+            'titulo' => $request->titulo,
+            'personagens' => $request->personagens,
+            'ideia_principal' => $request->ideia_principal,
+            'numero_paragrafos' =>  $request->numero_paragrafos,
+            'livro_id' => $request->livro_id,
+            'resumo_gerado' => $body
+        ]);
+
+        $livro = Livro::find($capitulo->livro_id);
+
+        return redirect()->route('capitulos', ['livro' => $livro] );
     }
 }

@@ -45,7 +45,7 @@
             display: flex;
             margin-top: 2%;
             margin-left: 3.5%;
-
+            gap: 10px;
         }
 
         .btn {
@@ -67,6 +67,15 @@
             background-color: #3e37c2ff;
             padding: 10px;
         }
+         .btn-deletar {
+            background-color: #c23737ff;
+            padding: 10px;
+        }
+        .btn-editar {
+            background-color: #c2ad37ff;
+            padding: 10px;
+        }
+        
     </style>
 </head>
 
@@ -88,6 +97,12 @@
                 <p><b>Número de parágrafos:</b> {{$capitulo->numero_paragrafos}}</p>
                 <div class="btn-alinhado">
                     <a href="{{ route('buscar.capitulo', ['capitulo' => $capitulo->id]) }}"><button type="submit" class="btn btn-Vis">Visualizar</button></a>
+                    <form action="{{ route('deletar.capitulo', ['capitulo' => $capitulo->id]) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-deletar">Deletar</button>
+                    </form>
+                     <a href="{{ route('editarpg.capitulo', ['capitulo'=> $capitulo->id])}}"><button type="submit" class="btn btn-editar">Editar</button></a>
                 </div>
                 <br>
             </div>
