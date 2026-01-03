@@ -90,38 +90,13 @@ class CapituloController extends Controller
                 'string',
                 Rule::unique('capitulos', 'titulo')->ignore($capitulo->id),
             ],
-            'personagens' => 'required|string',
-            'ideia_principal' => 'required|string',
-            'numero_paragrafos' => 'required|integer|min:1',
-            'livro_id' => 'required|exists:livros,id',
+            'resumo_gerado' => 'required|string'            
         ]);
 
-        $endpoint = 'https://n8n.pandoapps.com.br/webhook/escritoraDeLivros';
-
-        $payload = [
-            'Título' => $request->titulo,
-            'Personagens' => $request->personagens,
-            'Ideia' => $request->ideia_principal,
-            'Número de Parágrafos' => (int) $request->numero_paragrafos
-        ];
-
-        $response = Http::post($endpoint, $payload);
-        
-        $data = $response->json();
-        $body = $data['output'];
-
-        // tranforma o array em string
-        if(is_Array($body)){
-            $body = implode('\n\n', $body);
-        }
 
        $capitulo->update([
             'titulo' => $request->titulo,
-            'personagens' => $request->personagens,
-            'ideia_principal' => $request->ideia_principal,
-            'numero_paragrafos' =>  $request->numero_paragrafos,
-            'livro_id' => $request->livro_id,
-            'resumo_gerado' => $body
+            'resumo_gerado' => $request->resumo_gerado
         ]);
 
         $livro = Livro::find($capitulo->livro_id);

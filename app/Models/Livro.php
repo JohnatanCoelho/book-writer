@@ -19,4 +19,8 @@ class Livro extends Model{
     public function capitulos(){
        return $this -> hasMany(Capitulo::class);
     }
+
+    public function autores(){
+        return $this->belongsToMany(Autor::class);
+    }
 }

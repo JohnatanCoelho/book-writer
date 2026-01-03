@@ -33,10 +33,9 @@
             border: 0;
         }
 
-        .select2-container--default .select2-selection--single {
-            height: 55px;
-            padding: 15px;
-            width: 100%;
+        textarea{
+            height: 500px;
+            width: 500px;
         }
     </style>
 </head>
@@ -55,16 +54,7 @@
                 @csrf
                 @method('PUT')
                 <input type="text" name="titulo" placeholder="Título do Capítulo" value="{{ old('titulo', $capitulo-> titulo)}}">
-                <input type="text" name="personagens" placeholder="Personagens" value="{{ old('personagens', $capitulo-> personagens)}}">
-                <input type="text" name="ideia_principal" placeholder="Ideia Principal" value="{{ old('ideia_principal', $capitulo-> ideia_principal)}}">
-                <input type="text" name="numero_paragrafos" placeholder="Numero de Paragráfos" value="{{ old('numero_paragrafos', $capitulo-> numero_paragrafos)}}">
-                <select  name="livro_id" class="select2" style="width: 100%">
-                    <option>Selecione o Livro</option>
-                   @foreach($livros as $livro)
-                   <option value="{{ $livro->id }}" {{ old('livro_id', $capitulo->livro_id) == $livro->id ? 'selected' : '' }}>
-                    {{ $livro->titulo }}</option>
-                   @endforeach
-                </select>
+                <textarea name="resumo_gerado">{{ old('resumo_gerado', $capitulo->resumo_gerado)}}</textarea>
                 <input type="submit" value="Enviar">
             </form>
         </div>
