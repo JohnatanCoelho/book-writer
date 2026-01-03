@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\AutorController;
 use App\Http\Controllers\CapituloController;
 use App\Http\Controllers\LivroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+
+//Rotas de autores
+Route::get('/cd_autor', [AutorController::class, 'create'])->name('cd_autor');
+Route::post('/cd_autor', [AutorController::class, 'cadastrar'])->name('cadastrar.autor');
 
 //Rota de capitulos
 Route::get('/cd_cap', [CapituloController::class, 'create'])->name('cd_cap');

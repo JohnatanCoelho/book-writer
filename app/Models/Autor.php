@@ -10,7 +10,7 @@ class Autor extends Model
 
    protected $fillable = [
     'nome',
-    'naturalidade',
+    'nacionalidade',
     'bibliografia'
    ];
 
