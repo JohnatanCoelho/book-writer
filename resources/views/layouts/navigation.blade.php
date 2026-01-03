@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('livros')" :active="request()->routeIs('livros')">
                         {{ __('Listar Livros') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('autores')" :active="request()->routeIs('autores')">
+                        {{ __('Listar Autores') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('cd_livro')" :active="request()->routeIs('cd_livro')">
                         {{ __('Cadastrar Livros') }}
                     </x-nav-link>

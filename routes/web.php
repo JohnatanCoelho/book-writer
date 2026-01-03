@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Route;
 //Rotas de autores
 Route::get('/cd_autor', [AutorController::class, 'create'])->name('cd_autor');
 Route::post('/cd_autor', [AutorController::class, 'cadastrar'])->name('cadastrar.autor');
+Route::get('/autores', [AutorController::class, 'index'])->name('autores');
+Route::delete('/del_autor/{autor}', [AutorController::class, 'deletar'])->name('deletar.autor');
 
 //Rota de capitulos
 Route::get('/cd_cap', [CapituloController::class, 'create'])->name('cd_cap');

@@ -8,13 +8,20 @@ use Illuminate\Http\Request;
 
 class AutorController extends Controller
 {
+    public function index(){
+        $autores = Autor::with('livros')->get();
+       
+        return view('autores.index', compact('autores'));
+    }
    
-    public function create(){
+    public function create()
+    {
         $livros = Livro::all();
         return view('autores.cadastrar', compact('livros'));
     }
 
-    public function cadastrar(Request $request, Autor $autor){
+    public function cadastrar(Request $request, Autor $autor)
+    {
             $request->validate([
                 'nome' => 'required|string|max:100',
                 'nacionalidade' => 'required|string',
@@ -34,5 +41,14 @@ class AutorController extends Controller
             }
 
             return redirect()->route('livros');
+    }
+
+    public function deletar(Autor $autor){
+        
+        $autor->delete();
+
+        $autores = Autor::with('livros')->get();
+       
+        return view('autores.index', compact('autores'));
     }
 }
