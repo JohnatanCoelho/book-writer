@@ -34,10 +34,18 @@
             border: 0;
         }
 
-        .select2-container--default .select2-selection--single {
-            height: 55px;
-            padding: 15px;
-            width: 100%;
+        .select2-container {
+            width: 100% ;
+        }
+
+        .select2-container--default .select2-selection--multiple {
+            min-height: 65px;
+            padding: 10px;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            margin-top: -3.5%;
+            margin-top: 5%;
         }
     </style>
 </head>
@@ -58,7 +66,7 @@
                 <input type="hidden" name="_token" value="{{ csrf_token()}}">
                 <input type="text" name="titulo" placeholder="Título do Livro">
                 <select class="select2" name="tipo" style="width: 100%">
-                    <option></option>
+                    <option>Selecione o tipo</option>
                     <option value="Ação">Ação</option>
                     <option value="Aventura">Aventura</option>
                     <option value="Comédia">Comédia</option>
@@ -73,6 +81,12 @@
                     <option value="Mistério">Mistério</option>
                     <option value="Reflexão">Reflexão</option>
                 </select>
+                <select name="autores[]" class="select2" multiple style="width:100%;">
+                    <option >Selecione o autor</option>
+                    @foreach($autores as $autor)
+                    <option value="{{ $autor->id }}">{{$autor -> nome}}</option>
+                    @endforeach
+                </select>
                 <input type="submit" value="Enviar">
             </form>
         </div>
@@ -82,7 +96,6 @@
 <script>
     $(document).ready(function() {
         $('.select2').select2({
-            placeholder: 'Tipo',
             minimumResultsForSearch: 0,
         });
     });

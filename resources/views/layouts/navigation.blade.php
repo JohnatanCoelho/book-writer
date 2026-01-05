@@ -27,6 +27,9 @@
                     <x-nav-link :href="route('cd_autor')" :active="request()->routeIs('cd_autor')">
                         {{ __('Cadastrar Autores') }}
                     </x-nav-link>
+                     <x-nav-link :href="route('graf.tipos')" :active="request()->routeIs('graf.tipos')">
+                        {{ __('Grafico de tipos') }}
+                    </x-nav-link>
                 </div>
             </div>
 

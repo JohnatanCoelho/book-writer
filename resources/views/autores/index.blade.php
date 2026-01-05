@@ -72,7 +72,6 @@
                 <thead>
                     <tr>
                         <td>Autor</td>
-                        <td>Livro</td>
                         <td>Visualizar</td>
                         <td>Deletar</td>
                         <td>Editar</td>
@@ -80,11 +79,9 @@
                 </thead>
                 <tbody>
                     @foreach($autores as $autor)
-                    @foreach($autor->livros as $livro)
                     <tr>
                         <td>{{$autor -> nome}}</td>
-                        
-                        <td>{{$livro-> titulo}}</td>
+                
                        
                         <td><a href="{{route('visualizar.autor',['autor' => $autor->id])}}"><button class="btn btn-vis">Visualizar Autor</button></a></td>
                         <td>
@@ -98,7 +95,6 @@
                             <button class="btn btn-editar"><a href="{{ route('ed_autor', ['autor' => $autor -> id]) }}">Editar</button>
                         </td>
                     </tr>
-                    @endforeach
                     @endforeach
                 </tbody>
             </table>

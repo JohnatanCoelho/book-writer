@@ -6,6 +6,11 @@ use App\Http\Controllers\LivroController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+//Rotas de Gráficos
+Route::get('/graf_tipo', [LivroController::class, 'grafico_tipos']
+)->name('graf.tipos');
+Route::get('/dados_tipo', [LivroController::class, 'dados_tipos'])->name('dados.tipo');
+
 //Rotas de autores
 Route::get('/cd_autor', [AutorController::class, 'create'])->name('cd_autor');
 Route::post('/cd_autor', [AutorController::class, 'cadastrar'])->name('cadastrar.autor');

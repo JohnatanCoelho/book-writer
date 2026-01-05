@@ -69,6 +69,7 @@
                     <tr>
                         <td>Nome</td>
                         <td>Tipo</td>
+                        <td>Autor</td>
                         <td>Capítulos</td>
                         <td>Deletar</td>
                         <td>Editar</td>
@@ -76,9 +77,11 @@
                 </thead>
                 <tbody>
                     @foreach($livros as $livro)
+                    @foreach($livro->autores as $autor)
                     <tr>
-                        <td>{{$livro -> titulo}}</td>
-                        <td>{{$livro -> tipo}}</td>
+                        <td>{{$livro->titulo}}</td>
+                        <td>{{$livro->tipo}}</td>
+                        <td>{{$autor->nome}}</td>
                         <td><button class="btn btn-cap"><a href="{{ route('capitulos', ['livro' => $livro -> id]) }}">Visualizar</button></td>
                         <td>
                             <form method="POST" action="{{ route('deletar.livro', ['livro' => $livro -> id]) }}">
@@ -91,6 +94,7 @@
                             <button class="btn btn-editar"><a href="{{ route('edit', ['livro' => $livro -> id]) }}">Editar</button>
                         </td>
                     </tr>
+                    @endforeach
                     @endforeach
                 </tbody>
             </table>

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Autor;
 use App\Models\Livro;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 
@@ -11,18 +13,34 @@ class LivroController extends Controller
     
     public function index(){
 
-        $livros = Livro::all(); 
-
+        $livros = Livro::with('autores')->get(); 
         return view('livros.index', compact('livros'));
     }
     
     public function create(){
-        return view('livros.cadastro');
+        $autores = Autor::all();
+        return view('livros.cadastro', compact('autores'));
     }
 
-    public function cadastrarLivro(Request $request){
+    public function cadastrarLivro(Request $request, Livro $livro){
+
+        $request -> validate([
+            'titulo' => [
+                'required',
+                'string',
+                Rule::unique('livros', 'titulo' )->ignore($livro->id),
+            ],
+            'tipo' => 'required|string',
+            'autores' => 'required|array|min:1',
+            'autores.*' => 'exists:autores,id'
+        ]);
         
-        Livro::create($request->all()); 
+        $livro = Livro::create(
+            ['titulo' => $request->titulo,
+            'tipo' => $request->tipo]
+        ); 
+
+        $livro->autores()->sync($request->autores);
 
         return redirect()->route('livros');
     }
@@ -46,7 +64,9 @@ class LivroController extends Controller
                 'string',
                 Rule::unique('livros', 'titulo' )->ignore($livro->id),
             ],
-            'tipo' => 'required|string'
+            'tipo' => 'required|string',
+            'autores' => 'required|array|min:1',
+            'autores.*' => 'exists:autores,id'
         ]);
 
         $livro -> update([
@@ -55,6 +75,18 @@ class LivroController extends Controller
         ]);
 
         return redirect()->route('livros')->with('Atualizado com sucesso!');
+    }
+
+    public function grafico_tipos(){
+        return view('livros.graph');
+    }
+
+    public function dados_tipos(){
+        $tipos = Livro::select('tipo', DB::raw('COUNT(*) as total'))
+        ->groupBy('tipo')
+        ->get();
+
+        return response()->json($tipos);
     }
 
 }

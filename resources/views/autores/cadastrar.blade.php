@@ -73,11 +73,6 @@
                 <input type="text" name="nome" placeholder="Nome do Autor">
                 <input type="text" name="nacionalidade" placeholder="Nacionalidade">
                 <textarea name="bibliografia" placeholder="Escreva a bibliografia do autor" style="margin-bottom: 4%;"></textarea>
-                <select name="livros[]" class="select2" multiple>
-                    @foreach($livros as $livro)
-                    <option value="{{ $livro->id }}">{{$livro -> titulo}}</option>
-                    @endforeach
-                </select>
                 <input type="submit" value="Enviar">
             </form>
         </div>
