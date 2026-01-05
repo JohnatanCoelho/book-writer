@@ -11,6 +11,9 @@ Route::get('/cd_autor', [AutorController::class, 'create'])->name('cd_autor');
 Route::post('/cd_autor', [AutorController::class, 'cadastrar'])->name('cadastrar.autor');
 Route::get('/autores', [AutorController::class, 'index'])->name('autores');
 Route::delete('/del_autor/{autor}', [AutorController::class, 'deletar'])->name('deletar.autor');
+Route::get('/editar-autor/{autor}', [AutorController::class, 'edit'])->name('ed_autor');
+Route::put('/edit-autor/{autor}', [AutorController::class, 'update'])->name('atualizar.autor');
+Route::get('/visualizar/{autor}', [AutorController::class, 'visualizar'])->name('visualizar.autor');
 
 //Rota de capitulos
 Route::get('/cd_cap', [CapituloController::class, 'create'])->name('cd_cap');

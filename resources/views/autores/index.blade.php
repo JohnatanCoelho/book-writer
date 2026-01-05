@@ -50,6 +50,10 @@
             background-color: #ddbf3eff;
             padding: 10px;
         }
+          .btn-vis {
+            background-color: #61dd3eff;
+            padding: 10px;
+        }
 
     </style>
 </head>
@@ -69,17 +73,20 @@
                     <tr>
                         <td>Autor</td>
                         <td>Livro</td>
+                        <td>Visualizar</td>
                         <td>Deletar</td>
                         <td>Editar</td>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach($autores as $autor)
+                    @foreach($autor->livros as $livro)
                     <tr>
                         <td>{{$autor -> nome}}</td>
-                        @foreach($autor->livros as $livro)
+                        
                         <td>{{$livro-> titulo}}</td>
-                        @endforeach
+                       
+                        <td><a href="{{route('visualizar.autor',['autor' => $autor->id])}}"><button class="btn btn-vis">Visualizar Autor</button></a></td>
                         <td>
                             <form method="POST" action="{{ route('deletar.autor', ['autor' => $autor -> id]) }}">
                                 @csrf
@@ -88,9 +95,10 @@
                             </form>
                         </td>
                         <td>
-                            <button class="btn btn-editar"><a href="{{ route('edit', ['livro' => $livro -> id]) }}">Editar</button>
+                            <button class="btn btn-editar"><a href="{{ route('ed_autor', ['autor' => $autor -> id]) }}">Editar</button>
                         </td>
                     </tr>
+                    @endforeach
                     @endforeach
                 </tbody>
             </table>

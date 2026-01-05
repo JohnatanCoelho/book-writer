@@ -13,6 +13,13 @@ class AutorController extends Controller
        
         return view('autores.index', compact('autores'));
     }
+
+    public function visualizar(Autor $autor){
+
+        $autor->load('livros');
+
+        return view('autores.visualizar',compact('autor'));
+    }
    
     public function create()
     {
@@ -40,7 +47,7 @@ class AutorController extends Controller
                 $autor->livros()->sync($request->livros);
             }
 
-            return redirect()->route('livros');
+            return redirect()->route('autores');
     }
 
     public function deletar(Autor $autor){
@@ -50,5 +57,38 @@ class AutorController extends Controller
         $autores = Autor::with('livros')->get();
        
         return view('autores.index', compact('autores'));
+    }
+
+    public function edit(Autor $autor){
+        $livros = Livro::all();
+
+        return view('autores.editar', compact('autor', 'livros'));
+    }
+
+    public function update(Request $request, Autor $autor){
+
+         $request->validate([
+                'nome' => 'required|string|max:100',
+                'nacionalidade' => 'required|string',
+                'bibliografia' => 'required|string',
+                'livros' => 'required|array|min:1',
+                'livros.*' => 'exists:livros,id'
+            ]);
+
+            $autor-> update(
+                [
+                    'nome'=> $request->nome,
+                    'nacionalidade'=> $request->nacionalidade,
+                    'bibliografia'=>$request->bibliografia
+                ]
+            );
+
+
+        $autor->livros()->sync($request->livros ?? []);
+
+        $autores = Autor::with('livros')->get();
+
+        return view('autores.index', compact('autores'));
+
     }
 }
